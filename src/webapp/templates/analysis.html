@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1 class="mb-4">Stock Analysis</h1>
+<form id="analysis-form" method="POST">
+    <div class="mb-3">
+        <label for="stock-symbol" class="form-label">Stock Symbol</label>
+        <input type="text" class="form-control" id="stock-symbol" name="stock_symbol" required>
+    </div>
+    <div class="mb-3">
+        <label for="start-date" class="form-label">Start Date</label>
+        <input type="date" class="form-control" id="start-date" name="start_date" required>
+    </div>
+    <div class="mb-3">
+        <label for="end-date" class="form-label">End Date</label>
+        <input type="date" class="form-control" id="end-date" name="end_date" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Analyze</button>
+</form>
+
+<div id="analysis-results" class="mt-4" style="display: none;">
+    <h2>Analysis Results</h2>
+    <canvas id="analysis-chart"></canvas>
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <h3>Summary Statistics</h3>
+            <table class="table">
+                <tbody id="summary-stats"></tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h3>Technical Indicators</h3>
+            <table class="table">
+                <tbody id="technical-indicators"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

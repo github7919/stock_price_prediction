@@ -1,0 +1,157 @@
+import yfinance as yf
+import pandas as pd
+import os
+
+def get_financial_data(ticker, start_date, end_date):
+    stock = yf.Ticker(ticker)
+    
+    # Get historical market data
+    hist = stock.history(start=start_date, end=end_date)
+    
+    # Get key financial metrics
+    financials = stock.financials
+    balance_sheet = stock.balance_sheet
+    cash_flow = stock.cashflow
+    
+    return hist, financials, balance_sheet, cash_flow
+
+# List of 100+ tickers from different sectors
+tickers = [
+    "AAPL", "MSFT", "GOOGL", "AMZN", "FB", "TSLA", "JPM", "JNJ", "V", "PG",
+    "NVDA", "DIS", "NFLX", "ADBE", "PYPL", "INTC", "CSCO", "PEP", "KO", "NKE",
+    "MRK", "PFE", "ABT", "T", "VZ", "UNH", "HD", "MCD", "IBM", "ORCL",
+    "CRM", "WMT", "COST", "CVX", "XOM", "BA", "MMM", "CAT", "GE", "HON",
+    "UPS", "FDX", "LMT", "RTX", "SPGI", "MS", "GS", "BAC", "C", "WFC",
+    "BLK", "SCHW", "AMGN", "GILD", "BIIB", "REGN", "VRTX", "ILMN", "ISRG", "MDT",
+    "SYK", "DHR", "TMO", "BDX", "BAX", "ZTS", "EL", "CL", "KMB", "PG",
+    "MO", "PM", "SBUX", "YUM", "CMG", "DPZ", "NOC", "GD", "HII", "TXT",
+    "LHX", "TDG", "MTD", "PKI", "A", "BIO", "TMO", "RMD", "STE", "EW",
+    "ZBH", "BSX", "ALGN", "COO", "XRAY", "HSIC", "HOLX", "IDXX", "WAT", "IQV"
+]
+
+start_date = "2010-01-01"
+end_date = "2024-08-01"
+
+# Create a directory to save the data
+os.makedirs('financial_data', exist_ok=True)
+
+# Fetch and save data for each ticker
+for ticker in tickers:
+    try:
+        hist, financials, balance_sheet, cash_flow = get_financial_data(ticker, start_date, end_date)
+        
+        # Save historical data
+        hist.to_parquet(f'financial_data/{ticker}_historical.parquet')
+        
+        # Save financial metrics
+        financials.to_parquet(f'financial_data/{ticker}_financials.parquet')
+        balance_sheet.to_parquet(f'financial_data/{ticker}_balance_sheet.parquet')
+        cash_flow.to_parquet(f'financial_data/{ticker}_cash_flow.parquet')
+        
+        print(f"Data for {ticker} saved successfully.")
+    except Exception as e:
+        print(f"Error fetching data for {ticker}: {e}")
+
+
+Data for AAPL saved successfully.
+Data for MSFT saved successfully.
+Data for GOOGL saved successfully.
+Data for AMZN saved successfully.
+$FB: possibly delisted; No timezone found
+Data for FB saved successfully.
+Data for TSLA saved successfully.
+Data for JPM saved successfully.
+Data for JNJ saved successfully.
+Data for V saved successfully.
+Data for PG saved successfully.
+Data for NVDA saved successfully.
+Data for DIS saved successfully.
+Data for NFLX saved successfully.
+Data for ADBE saved successfully.
+Data for PYPL saved successfully.
+Data for INTC saved successfully.
+Data for CSCO saved successfully.
+Data for PEP saved successfully.
+Data for KO saved successfully.
+Data for NKE saved successfully.
+Data for MRK saved successfully.
+Data for PFE saved successfully.
+Data for ABT saved successfully.
+Data for T saved successfully.
+Data for VZ saved successfully.
+Data for UNH saved successfully.
+Data for HD saved successfully.
+Data for MCD saved successfully.
+Data for IBM saved successfully.
+Data for ORCL saved successfully.
+Data for CRM saved successfully.
+Data for WMT saved successfully.
+Data for COST saved successfully.
+Data for CVX saved successfully.
+Data for XOM saved successfully.
+Data for BA saved successfully.
+Data for MMM saved successfully.
+Data for CAT saved successfully.
+Data for GE saved successfully.
+Data for HON saved successfully.
+Data for UPS saved successfully.
+Data for FDX saved successfully.
+Data for LMT saved successfully.
+Data for RTX saved successfully.
+Data for SPGI saved successfully.
+Data for MS saved successfully.
+Data for GS saved successfully.
+Data for BAC saved successfully.
+Data for C saved successfully.
+Data for WFC saved successfully.
+Data for BLK saved successfully.
+Data for SCHW saved successfully.
+Data for AMGN saved successfully.
+Data for GILD saved successfully.
+Data for BIIB saved successfully.
+Data for REGN saved successfully.
+Data for VRTX saved successfully.
+Data for ILMN saved successfully.
+Data for ISRG saved successfully.
+Data for MDT saved successfully.
+Data for SYK saved successfully.
+Data for DHR saved successfully.
+Data for TMO saved successfully.
+Data for BDX saved successfully.
+Data for BAX saved successfully.
+Data for ZTS saved successfully.
+Data for EL saved successfully.
+Data for CL saved successfully.
+Data for KMB saved successfully.
+Data for PG saved successfully.
+Data for MO saved successfully.
+Data for PM saved successfully.
+Data for SBUX saved successfully.
+Data for YUM saved successfully.
+Data for CMG saved successfully.
+Data for DPZ saved successfully.
+Data for NOC saved successfully.
+Data for GD saved successfully.
+Data for HII saved successfully.
+Data for TXT saved successfully.
+Data for LHX saved successfully.
+Data for TDG saved successfully.
+Data for MTD saved successfully.
+$PKI: possibly delisted; No timezone found
+Data for PKI saved successfully.
+Data for A saved successfully.
+Data for BIO saved successfully.
+Data for TMO saved successfully.
+Data for RMD saved successfully.
+Data for STE saved successfully.
+Data for EW saved successfully.
+Data for ZBH saved successfully.
+Data for BSX saved successfully.
+Data for ALGN saved successfully.
+Data for COO saved successfully.
+Data for XRAY saved successfully.
+Data for HSIC saved successfully.
+Data for HOLX saved successfully.
+Data for IDXX saved successfully.
+Data for WAT saved successfully.
+Data for IQV saved successfully.

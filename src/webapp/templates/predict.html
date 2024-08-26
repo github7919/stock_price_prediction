@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1 class="mb-4">Stock Price Prediction</h1>
+<form id="prediction-form" method="POST">
+    <div class="mb-3">
+        <label for="stock-symbol" class="form-label">Stock Symbol</label>
+        <input type="text" class="form-control" id="stock-symbol" name="stock_symbol" required>
+    </div>
+    <div class="mb-3">
+        <label for="prediction-days" class="form-label">Number of Days to Predict</label>
+        <input type="number" class="form-control" id="prediction-days" name="prediction_days" min="1" max="30" value="7" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Predict</button>
+</form>
+
+<div id="prediction-results" class="mt-4" style="display: none;">
+    <h2>Prediction Results</h2>
+    <canvas id="prediction-chart"></canvas>
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Predicted Price</th>
+            </tr>
+        </thead>
+        <tbody id="prediction-table-body"></tbody>
+    </table>
+</div>
+{% endblock %}

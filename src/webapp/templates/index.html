@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1 class="mb-4">Welcome to Stock Price Prediction</h1>
+<p>This application uses machine learning to predict stock prices based on historical data.</p>
+<div class="row">
+    <div class="col-md-6">
+        <h2>Features</h2>
+        <ul>
+            <li>Predict stock prices for various companies</li>
+            <li>Analyze historical stock data</li>
+            <li>Visualize predictions and trends</li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h2>Get Started</h2>
+        <p>To begin, navigate to the Predict page and enter a stock symbol to get price predictions.</p>
+        <a href="/predict" class="btn btn-primary">Start Predicting</a>
+    </div>
+</div>
+{% endblock %}
